@@ -148,6 +148,7 @@ mvn test
 
 ## 📂 Architecture du projet
 ### 1. Frontend (flight-app)
+```text
 flight-app/
 ├── src/
 │   └── app/
@@ -172,6 +173,8 @@ flight-app/
 ├── main.ts
 └── angular.json
 
+```
+
 components/ : tous les composants UI réutilisables.
 
 models/ : structure des données (ex: Vol).
@@ -181,6 +184,7 @@ constants/ : valeurs constantes, URLs API.
 services/ : services pour la communication avec le backend (HTTP) (utilisation de observable et subscribe pattern de RxJS). 
 
 ### 2. Backend (Spring Boot - springbootBackend1)
+```text
 springbootBackend1/
 ├── src/
 │   ├── main/
@@ -207,6 +211,8 @@ springbootBackend1/
 │           └── ReservationServiceImplTest.java
 ├── pom.xml
 └── application.properties
+
+```
 
 controllers/ : endpoints REST.
 
