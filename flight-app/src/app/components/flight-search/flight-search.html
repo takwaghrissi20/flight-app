@@ -1,0 +1,114 @@
+<app-flight-header> </app-flight-header>
+
+<app-reservation-modal
+  [visible]="showModal"
+  [placesDisponibles]="selectedVol?.placesDisponibles || 0"
+  (dismiss)="showModal = false"
+  (confirm)="onReserve($event)">
+</app-reservation-modal>
+
+
+<div class="flight-search-container">
+  <div class="search-row" *ngIf="!isCompact">
+    <div class="inputs">
+      <input type="text" [(ngModel)]="villeDepart" placeholder="Ville départ"  [ngClass]="{'invalid': invalidFields.villeDepart}" />
+
+      <!-- bouton échange -->
+      <button type="button" class="swap-button" (click)="swapVilles()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 10h-14l4-4m-4 8h14l-4 4"/>
+        </svg>
+      </button>
+
+      <input type="text" [(ngModel)]="villeArrivee" placeholder="Ville arrivée" [ngClass]="{'invalid': invalidFields.villeArrivee}"/>
+
+      <div class="date-input">
+        <input type="text" [value]="dateDepart" readonly placeholder="Date départ" (click)="showDepartCalendar=true" [ngClass]="{'invalid': invalidFields.dateDepart}"/>
+        <div *ngIf="showDepartCalendar" class="calendar-wrapper">
+          <lib-calendar
+            (dateSelected)="onDepartSelected($event)"
+            (back)="showDepartCalendar=false">
+          </lib-calendar>
+        </div>
+      </div>
+
+      <div class="date-input">
+        <input type="text" [value]="dateArrivee" readonly placeholder="Date arrivée" (click)="showArriveeCalendar=true"/>
+        <div *ngIf="showArriveeCalendar" class="calendar-wrapper">
+          <lib-calendar
+            (dateSelected)="onArriveeSelected($event)"
+            (back)="showArriveeCalendar=false">
+          </lib-calendar>
+        </div>
+      </div>
+    </div>
+
+    <button class="search-button" (click)="rechercherVols()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="8" cy="8" r="6"></circle>
+        <line x1="12" y1="12" x2="18" y2="18"></line>
+      </svg>
+      Rechercher
+    </button>
+  </div>
+
+  <div
+    class="compact-bar"
+    *ngIf="isCompact"
+    tabindex="0"
+    (click)="expandSearchBar()"
+    (keyup)="($event.key === 'Enter' || $event.key === ' ') && expandSearchBar()"
+    aria-label="Expand search bar"
+    role="button"
+    style="cursor: pointer;"
+  >
+    <span>{{ villeDepart }} → {{ villeArrivee }}</span>
+    <span *ngIf="dateDepart"> • {{ dateDepart }}</span>
+    <span *ngIf="dateArrivee"> – {{ dateArrivee }}</span>
+  </div>
+
+  <!-- tri toujours affiché -->
+  <div class="sort-container">
+    <label for="critereTri">Trier par : </label>
+    <select [(ngModel)]="critereTri" id="critereTri" >
+      <option value="prix">Prix</option>
+      <option value="tempsTrajet">Temps de trajet</option>
+    </select>
+  </div>
+
+  <app-not-found
+    [visible]="hasSearched && vols.length === 0"
+  notFoundMessage="Aucun vol trouvé !"
+ 
+  ></app-not-found>
+  
+  <table *ngIf="vols.length > 0">
+    <thead>
+      <tr>
+        <th>Ville départ</th>
+        <th>Ville arrivée</th>
+        <th>Date départ</th>
+        <th>Date arrivée</th>
+        <th>Prix</th>
+        <th>Temps de trajet</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vol of vols">
+        <td>{{ vol.villeDepart }}</td>
+        <td>{{ vol.villeArrivee }}</td>
+        <td>{{ vol.dateDepart }}</td>
+        <td>{{ vol.dateArrivee }}</td>
+        <td>{{ vol.prix }} €</td>
+        <td>{{ formatTemps(vol.tempsTrajet) }}</td>
+        <td>
+        <app-reservation-button 
+          [volId]="vol.id" 
+          (reserve)="openReservation(vol)">
+        </app-reservation-button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

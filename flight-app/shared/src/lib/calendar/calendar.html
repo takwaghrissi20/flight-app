@@ -1,0 +1,39 @@
+ <div class="calendar">
+  <div class="calendar__opts">
+    <select [value]="months[selectedMonth]" (change)="onMonthChange($event)">
+      <option *ngFor="let month of months">{{ month }}</option>
+    </select>
+    <select [value]="selectedYear" (change)="onYearChange($event)">
+      <option *ngFor="let year of years">{{ year }}</option>
+    </select>
+  </div>
+
+  <div class="calendar__body">
+    <div class="calendar__days">
+      <div *ngFor="let day of ['M','T','W','T','F','S','S']">{{ day }}</div>
+    </div>
+    <div class="calendar__dates">
+      <div
+  *ngFor="let date of dates"
+  class="calendar__date"
+  [ngClass]="{
+    'calendar__date--grey': date.isGrey,
+    'calendar__date--selected': date.isSelected
+  }"
+  (click)="selectDate(date)"
+  (keyup.enter)="selectDate(date)"
+  tabindex="0"
+  role="button"
+  aria-label="Select date {{date.day}}"
+>
+  <span>{{ date.day }}</span>
+</div>
+
+    </div>
+  </div>
+
+  <div class="calendar__buttons">
+    <button class="calendar__button calendar__button--grey" (click)="onBack()">Back</button>
+    <button class="calendar__button calendar__button--primary" (click)="emitSelectedDate()">Apply</button>
+  </div>
+</div>

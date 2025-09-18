@@ -1,0 +1,55 @@
+/* loading.component.scss */
+.loading-container {
+  position: fixed; /* covers the whole viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95); /* semi-transparent white */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* on top of everything */
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    animation: spin 1.5s linear infinite;
+  }
+
+  span {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #163bab;
+    margin-top: 1rem;
+  }
+
+  .slogan {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 0.3rem;
+    background: linear-gradient(90deg, #1752ff, #ff6f61, #00c6ff, #ffdd00, #1752ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #163bab;
+    width: 0;
+    animation: typing 3s steps(30) forwards, blink 0.75s step-end infinite alternate;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 18ch; } /* Adjust to slogan length */
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}

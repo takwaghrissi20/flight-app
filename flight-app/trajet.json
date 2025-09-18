@@ -1,0 +1,38 @@
+[
+  {
+    "dateDepart": "2025-09-18",
+    "dateArrivee": "2025-09-18",
+    "villeDepart": "Paris",
+    "villeArrivee": "Lyon",
+    "prix": 120.5,
+    "tempsTrajet": 75,
+    "capacite": 300
+  },
+  {
+    "dateDepart": "2025-09-19",
+    "dateArrivee": "2025-09-19",
+    "villeDepart": "Paris",
+    "villeArrivee": "Marseille",
+    "prix": 150.0,
+    "tempsTrajet": 120,
+    "capacite": 150
+  },
+  {
+    "dateDepart": "2025-09-20",
+    "dateArrivee": "2025-09-20",
+    "villeDepart": "Lyon",
+    "villeArrivee": "Paris",
+    "prix": 110.0,
+    "tempsTrajet": 80,
+    "capacite": 140
+  },
+  {
+    "dateDepart": "2025-09-21",
+    "dateArrivee": "2025-09-21",
+    "villeDepart": "Marseille",
+    "villeArrivee": "Paris",
+    "prix": 160.0,
+    "tempsTrajet": 130,
+    "capacite": 100
+  }
+]
