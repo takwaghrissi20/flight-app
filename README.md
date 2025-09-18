@@ -118,6 +118,8 @@ Sélection du nombre de places
 Gestion d’erreurs : toast si pas assez de places
 Gestion d’erreurs : toast si meme user réserve le meme vol 
 
+toute tentative réusite ou échouée de réservation est journalisé dans la table audit_reservation
+
 * UI
 
 Header avec logo, slogan, login/user info
@@ -222,11 +224,11 @@ models/ : entités JPA.
 
 repositories/ : accès aux données (Spring Data JPA).
 
-dto/ : objets de transfert (DTO).
+dto/ : objets de transfert (DTO) pour l'exemple de json pour reserver un vol.
 
 exception/ : gestion des exceptions personnalisées.
 
-listeners/ : événements ou hooks.
+listeners/ : événements ou hooks pour le  logique de l'audit.
 
 test/ : tests unitaires et d’intégration.
 
