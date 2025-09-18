@@ -173,6 +173,7 @@ flight-app/
 ├── environments/
 ├── index.html
 ├── main.ts
+└── trajet.json      
 └── angular.json
 
 ```
